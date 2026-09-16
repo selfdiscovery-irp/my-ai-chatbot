@@ -4,6 +4,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>My AI Chatbot</title>
+
   <style>
     body {
       margin: 0;
@@ -72,4 +73,77 @@
       border-radius: 10px;
       background: #222;
       color: white;
-      font-weight
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #444;
+    }
+  </style>
+</head>
+
+<body>
+
+  <div class="app">
+
+    <header>
+      My AI Chatbot
+    </header>
+
+    <div id="chat">
+      <div class="message bot">
+        Hello! How can I help you?
+      </div>
+    </div>
+
+    <div class="input-area">
+      <input
+        type="text"
+        id="userInput"
+        placeholder="Type your message..."
+      >
+
+      <button onclick="sendMessage()">
+        Send
+      </button>
+    </div>
+
+  </div>
+
+  <script>
+    function sendMessage() {
+      const input = document.getElementById("userInput");
+      const chat = document.getElementById("chat");
+
+      const message = input.value.trim();
+
+      if (message === "") {
+        return;
+      }
+
+      const userMessage = document.createElement("div");
+      userMessage.className = "message user";
+      userMessage.textContent = message;
+      chat.appendChild(userMessage);
+
+      const botMessage = document.createElement("div");
+      botMessage.className = "message bot";
+      botMessage.textContent =
+        "I received your message: " + message;
+
+      chat.appendChild(botMessage);
+
+      input.value = "";
+      chat.scrollTop = chat.scrollHeight;
+    }
+
+    document.getElementById("userInput").addEventListener("keydown", function(event) {
+      if (event.key === "Enter") {
+        sendMessage();
+      }
+    });
+  </script>
+
+</body>
+</html>
